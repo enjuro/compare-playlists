@@ -1,28 +1,41 @@
 import streamlit as st
 
 # import numpy as np
-# import pandas as pd
+import pandas as pd
 # from PIL import Image
 import module
-
 
 
 st.title("streamlitでSpotify APIを使う")
 
 
-# 入力フィールドを追加
-search_query = st.text_input("検索クエリ:")
+search_query1 = st.text_input("検索クエリ:")
+search_button1 = st.button("検索1")
 
-# 検索ボタンを追加
-search_button = st.button("検索")
+if search_button1:
+    image = module.get_artist_image(search_query1)
+    st.write(search_query1)
+    st.image(image)
+
+
+search_query2 = st.text_input("プレイリストのURLを入力してください")
+
+search_button2 = st.button("検索2")
+if search_button2:
+    songs = module.get_songs_from_playlist(search_query2)
+    df = pd.DataFrame()
+
+    for song in songs:
+        st.write(song["track"]["name"])
+
+        feature = module.get_audio_features(song["track"]["uri"])
+        new_row = pd.DataFrame.from_dict(feature)
+        st.dataframe(new_row)
+
+    # st.dataframe(df)
 
 
 
-
-if search_button:
-    result = module.get_artist_image(search_query)
-    st.write(search_query)
-    st.image(result)
 
 
 
