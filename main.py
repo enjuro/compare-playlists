@@ -1,66 +1,25 @@
 import streamlit as st
-
-# import numpy as np
 import pandas as pd
-# from PIL import Image
 import module
 
 
-st.title("streamlitでSpotify APIを使う")
-
-
-search_query1 = st.text_input("検索クエリ:")
-search_button1 = st.button("検索1")
-
-if search_button1:
-    image = module.get_artist_image(search_query1)
-    st.write(search_query1)
-    st.image(image)
+st.title("Spotifyプレイリストの分析")
 
 
 search_query2 = st.text_input("プレイリストのURLを入力してください")
 
-search_button2 = st.button("検索2")
+search_button2 = st.button("楽曲情報取得")
 if search_button2:
+    songs_df = pd.DataFrame()
+
     songs = module.get_songs_from_playlist(search_query2)
-    df = pd.DataFrame()
 
     for song in songs:
-        st.write(song["track"]["name"])
+        # st.write(song["track"]["name"])
+        song_feature_dict = module.get_audio_features(song["track"]["uri"])
+        song_feature_df = pd.DataFrame.from_dict(song_feature_dict)
+        # st.dataframe(song_feature_df)
+        songs_df = pd.concat([songs_df, song_feature_df])
 
-        feature = module.get_audio_features(song["track"]["uri"])
-        new_row = pd.DataFrame.from_dict(feature)
-        st.dataframe(new_row)
+    st.dataframe(songs_df)
 
-    # st.dataframe(df)
-
-
-
-
-
-
-
-
-"""
-# タイトル
-# test change
-
-
-```
-import streamlit as st
-```
-"""
-
-# st.write("dataframe")
-
-# df = pd.DataFrame({
-#     "1": [1, 2, 3, 4],
-#     "2": [12, 22, 32, 42]
-# })
-
-# st.dataframe(df)
-
-
-
-# img = Image.open("./climb.JPG")
-# st.image(img, caption="登っている俺", use_column_width=True)

@@ -10,7 +10,7 @@ def get_songs_from_playlist(playlist_url):
     playlist_id = playlist_url.split('/')[-1]
 
     # Get playlist tracks
-    results = sp.playlist_tracks(playlist_id)
+    results = sp.playlist_tracks(playlist_id, limit=10)
     return results['items']
 
 
