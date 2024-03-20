@@ -15,11 +15,16 @@ if search_button2:
     songs = module.get_songs_from_playlist(search_query2)
 
     for song in songs:
-        # st.write(song["track"]["name"])
+        # タイトルを取得
+        song_title = song["track"]["name"]
+        # 楽曲の特徴を辞書型で取得
         song_feature_dict = module.get_audio_features(song["track"]["uri"])
+        # 楽曲の特徴の辞書型をデータフレーム型に変換
         song_feature_df = pd.DataFrame.from_dict(song_feature_dict)
-        # st.dataframe(song_feature_df)
+        # 数値のデータのみに限定
+        song_feature_df = song_feature_df.select_dtypes(include='float64')
+        song_feature_df.index = [song_title]
         songs_df = pd.concat([songs_df, song_feature_df])
-
+        
     st.dataframe(songs_df)
 
