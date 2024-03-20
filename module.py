@@ -14,6 +14,10 @@ def get_songs_from_playlist(playlist_url):
     return results['items']
 
 
+def get_audio_features(song_id):
+    return sp.audio_features(song_id)
+
+
 def get_artist_image(artist_name):
     # アーティストを検索してIDを取得
     results = sp.search(q=artist_name, type='artist')
@@ -30,7 +34,3 @@ def get_artist_image(artist_name):
             return "No image available for this artist"
     else:
         return "Artist not found"
-
-def get_audio_features(song_id):
-    return sp.audio_features(song_id)
-

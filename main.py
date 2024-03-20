@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import module
 
 
@@ -28,3 +29,23 @@ if search_button2:
         
     st.dataframe(songs_df)
 
+
+    # for column in songs_df.columns:
+    #     st.write(column)
+    #     # 選択した列の要素をプロット
+    #     plt.figure(figsize=(8, 6))
+    #     plt.bar(songs_df.index, songs_df[column])
+    #     plt.title(f'Plot of {column}')
+    #     plt.xlabel('Index')
+    #     plt.ylabel('Value')
+    #     plt.grid(True)
+    #     st.pyplot(plt)
+
+    for column in songs_df.columns:
+        st.subheader(f'Histogram for {column}')
+        plt.figure(figsize=(8, 6))
+        plt.hist(songs_df[column], bins=10, edgecolor='black')
+        plt.title(column)
+        plt.xlabel(column)
+        plt.ylabel('Frequency')
+        st.pyplot(plt)
