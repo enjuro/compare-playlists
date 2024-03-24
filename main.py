@@ -16,6 +16,8 @@ if search_button:
     songs_1 = module.get_songs_by_playlist_keyword(search_query_1)
     songs_2 = module.get_songs_by_playlist_keyword(search_query_2)
 
+
+
     songs_1_df = module.create_song_df(songs_1)
     songs_2_df = module.create_song_df(songs_2)
 
