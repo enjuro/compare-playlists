@@ -1,8 +1,5 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-import japanize_matplotlib
-japanize_matplotlib.japanize()
-import seaborn as sns
 import module
 
 
@@ -42,15 +39,13 @@ if search_button:
 
 
         st.header("ヒストグラムでの各特長の比較")
+        st.write(f"青：「{search_query_1}」　オレンジ：「{search_query_2}」")
+
         for column in songs_1_df.columns:
             st.subheader(f"{column}の比較")
-            st.write(f"赤：「{search_query_1}」")
-            st.write(f"青：「{search_query_2}」")
-
-
             fig, ax = plt.subplots()
-            plt.hist(songs_1_df[column], color="red", alpha=0.5, histtype='step', linewidth=2)
-            plt.hist(songs_2_df[column], color="blue", alpha=0.5, histtype='step', linewidth=2)
+            plt.hist([songs_1_df[column], songs_2_df[column]], bins=20)
+
             st.pyplot(fig)
 
     # 入力欄のどちらかが空だったらアラート
