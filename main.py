@@ -31,22 +31,26 @@ if search_button:
         st.subheader(f"「{search_query_1}」で検索したプレイリストに含まれる楽曲の概要")
         st.write(songs_1_df.describe())
         st.write("取得したプレイリスト名　※各10曲抽出")
-        st.write(", ".join(playlist_titles_1))
+        for title in playlist_titles_1:
+            st.write(f"- {title}")
 
         st.subheader(f"「{search_query_2}」で検索したプレイリストに含まれる楽曲の概要")
         st.write(songs_2_df.describe())
         st.write("取得したプレイリスト名　※各10曲抽出")
-        st.write(", ".join(playlist_titles_2))
+        for title in playlist_titles_2:
+            st.write(f"- {title}")
 
 
         st.header("ヒストグラムでの各特長の比較")
         for column in songs_1_df.columns:
             st.subheader(f"{column}の比較")
-            st.write(f"赤：{search_query_1}　青：{search_query_2}")
+            st.write(f"赤：「{search_query_1}」")
+            st.write(f"青：「{search_query_2}」")
+
 
             fig, ax = plt.subplots()
-            plt.hist(songs_1_df[column], color="red", alpha=0.5)
-            plt.hist(songs_2_df[column], color="blue", alpha=0.5)
+            plt.hist(songs_1_df[column], color="red", alpha=0.5, histtype='step', linewidth=2)
+            plt.hist(songs_2_df[column], color="blue", alpha=0.5, histtype='step', linewidth=2)
             st.pyplot(fig)
 
     # 入力欄のどちらかが空だったらアラート
