@@ -1,6 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import japanize_matplotlib
+japanize_matplotlib.japanize() 
 import module
 
 
