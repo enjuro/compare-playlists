@@ -1,6 +1,8 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import japanize_matplotlib
 import module
+
 
 st.title("Spotifyプレイリストの比較分析ツール")
 

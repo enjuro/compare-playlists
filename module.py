@@ -7,7 +7,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="f901ff2443
 def create_song_df_from_keyword(keyword):
     
         # キーワードからプレイリストを取得しそれらのidを配列に代入
-    playlist_items = sp.search(q=keyword, type='playlist', limit=2)["playlists"]["items"]
+    playlist_items = sp.search(q=keyword, type='playlist', limit=10)["playlists"]["items"]
     playlist_ids = list(map(lambda item: item["id"], playlist_items))
     playlist_titles = list(map(lambda item: item["name"], playlist_items))
 
