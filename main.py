@@ -41,26 +41,14 @@ if search_button:
 
         st.header("ヒストグラムでの各特長の比較")
         for column in songs_1_df.columns:
-            # st.subheader(f"{column}の比較")
-
-            # fig, ax = plt.subplots()
-            # plt.hist(songs_1_df[column], color="red", alpha=0.5)
-            # plt.hist(songs_2_df[column], color="blue", alpha=0.5)
-            # plt.legend([search_query_1, search_query_2], prop={"family": "MS Gothic"})
-            # st.pyplot(fig)
-
             st.subheader(f"{column}の比較")
-
-            # seabornでスタイルを設定
-            sns.set_style("darkgrid")
-            # フォントを設定
-            plt.rcParams["font.family"] = "MS Gothic"
+            st.write(f"赤：{search_query_1}　青：{search_query_2}")
 
             fig, ax = plt.subplots()
-            sns.histplot(data=songs_1_df[column], color="red", alpha=0.5, ax=ax)
-            sns.histplot(data=songs_2_df[column], color="blue", alpha=0.5, ax=ax)
-            ax.legend([search_query_1, search_query_2])
+            plt.hist(songs_1_df[column], color="red", alpha=0.5)
+            plt.hist(songs_2_df[column], color="blue", alpha=0.5)
             st.pyplot(fig)
+
     # 入力欄のどちらかが空だったらアラート
     else:
         st.warning("2つの検索キーを入力してください")
