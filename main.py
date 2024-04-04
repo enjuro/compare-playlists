@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 import module
 
 
-st.title("Spotifyプレイリストの比較分析ツール")
+st.title("Spotifyキーワード比較分析ツール")
 
 '''
-2つの検索ワードを入力すると、そのワードからSpotify上のプレイリストを複数取得し、それらに含まれる楽曲をまとめ、特徴をヒストグラムに表示します。
-それぞれのキーワードから得られるプレイリストに含まれる曲が、どのように異なるのかを比較することができます。
+検索ワードから取得できるプレイリストに含まれる複数の楽曲の特徴をヒストグラムで表し、比較することができるツールです。
+２つのワードの関係性を音楽の特性から見出すことができます。
 '''
 # 検索窓
-search_query_1 = st.text_input("検索ワード1", placeholder="例：ドライブ")
-search_query_2 = st.text_input("検索ワード2",  placeholder="例：リラックス")
+search_query_1 = st.text_input("検索ワード１", placeholder="例：ドライブ")
+search_query_2 = st.text_input("検索ワード２",  placeholder="例：カフェ")
 
 # 検索実行ボタン
-search_button = st.button("プレイリスト情報取得")
+search_button = st.button("楽曲データ取得")
 
 # ボタンが押されたとき
 if search_button: 
@@ -39,14 +39,15 @@ if search_button:
 
 
         st.header("ヒストグラムでの各特長の比較")
-        st.write(f"青：「{search_query_1}」　オレンジ：「{search_query_2}」")
 
         for column in songs_1_df.columns:
             st.subheader(f"{column}の比較")
+            st.write(module.feature_explaination[column])
             fig, ax = plt.subplots()
             plt.hist([songs_1_df[column], songs_2_df[column]], bins=20)
 
             st.pyplot(fig)
+            st.markdown(f"<center><font color=#1F77B4>「{search_query_1}」</font>　<font color=#FF7F0E>「{search_query_2}」</font></center>", unsafe_allow_html=True)
 
     # 入力欄のどちらかが空だったらアラート
     else:
