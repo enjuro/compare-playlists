@@ -4,7 +4,7 @@
 
 # DEMO
 
-https://app-app-yxfnknp6lw9srxvn57ukur.streamlit.app/
+https://compare-playlists-8m6jmvkwzla2t6jyik4ztu.streamlit.app/
 
 # Features
 
